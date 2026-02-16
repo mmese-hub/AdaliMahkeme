@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adalı Mahkeme - Beraat Optimizasyonu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section-title {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .hakim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .hakim-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hakim-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .hakim-input {
+            margin-bottom: 10px;
+        }
+
+        .hakim-input label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .hakim-input input {
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-section {
+            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            color: white;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .result-section.show {
+            display: block;
+        }
+
+        .result-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .result-detail {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .result-detail h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .result-detail p {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+
+        .cost-highlight {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .strategy-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #1565c0;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .hakim-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚖️ Adalı Mahkeme</h1>
+        <p class="subtitle">Beraat Optimizasyon Sistemi</p>
+
+        <div class="info-box">
+            <strong>📋 Mahkeme Kuralları:</strong>
+            • Hâkim "Beraat" verirse → Direkt serbest<br>
+            • Hâkim "Çekimser" kalırsa → Jürinin >%50'si beraat demeli<br>
+            • Hâkim "Suçlu" derse → Jürinin %100'ü beraat demeli
+        </div>
+
+        <div class="section">
+            <h3 class="section-title"><span class="icon">👥</span> Jüri Bilgileri</h3>
+            <div class="input-group">
+                <label for="juriSayisi">Jüri Üye Sayısı:</label>
+                <input type="number" id="juriSayisi" min="1" value="7" placeholder="Örn: 7">
+            </div>
+            <div class="input-group">
+                <label for="juriRusvet">Her Jüri Üyesinin İstediği Rüşvet (₺):</label>
+                <input type="number" id="juriRusvet" min="0" value="1000" placeholder="Örn: 1000">
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title"><span class="icon">👨‍⚖️</span> Hâkim Rüşvet Tutarları</h3>
+            <div class="hakim-grid" id="hakimGrid">
+                <!-- Hâkim kartları JavaScript ile oluşturulacak -->
+            </div>
+        </div>
+
+        <button class="calculate-btn" onclick="hesapla()">
+            🔍 Optimal Stratejiyi Hesapla
+        </button>
+
+        <div class="result-section" id="resultSection">
+            <h3 class="result-title">✅ Optimal Çözüm Bulundu!</h3>
+            <div class="cost-highlight" id="minCost"></div>
+            <div class="result-detail" id="resultDetail"></div>
+            <div class="result-detail" id="allStrategies"></div>
+        </div>
+    </div>
+
+    <script>
+        // 5 hâkim kartı oluştur
+        function createHakimCards() {
+            const grid = document.getElementById('hakimGrid');
+            for (let i = 1; i <= 5; i++) {
+                const card = document.createElement('div');
+                card.className = 'hakim-card';
+                card.innerHTML = `
+                    <h4>Hâkim ${i}</h4>
+                    <div class="hakim-input">
+                        <label>Beraat Rüşveti (₺):</label>
+                        <input type="number" id="hakim${i}Beraat" min="0" value="${3000 + i * 2000}" placeholder="0">
+                    </div>
+                    <div class="hakim-input">
+                        <label>Çekimser Rüşveti (₺):</label>
+                        <input type="number" id="hakim${i}Cekimser" min="0" value="${2000 + i * 1000}" placeholder="0">
+                    </div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+
+        function hesapla() {
+            // Input değerlerini al
+            const juriSayisi = parseInt(document.getElementById('juriSayisi').value);
+            const juriRusvet = parseInt(document.getElementById('juriRusvet').value);
+
+            if (juriSayisi <= 0 || isNaN(juriSayisi)) {
+                alert('Lütfen geçerli bir jüri sayısı girin!');
+                return;
+            }
+
+            if (juriRusvet < 0 || isNaN(juriRusvet)) {
+                alert('Lütfen geçerli bir jüri rüşvet tutarı girin!');
+                return;
+            }
+
+            let minCost = Infinity;
+            let bestHakim = null;
+            let bestStrategy = null;
+            let allResults = [];
+
+            // Çoğunluk için gereken jüri sayısı (yarıdan fazla)
+            const juriCoguluk = Math.floor(juriSayisi / 2) + 1;
+
+            // Her hâkim için hesaplama yap
+            for (let i = 1; i <= 5; i++) {
+                const beraatRusvet = parseInt(document.getElementById(`hakim${i}Beraat`).value) || 0;
+                const cekimserRusvet = parseInt(document.getElementById(`hakim${i}Cekimser`).value) || 0;
+
+                // Senaryo 1: Hâkimi beraat'e ikna et
+                const senaryo1 = beraatRusvet;
+
+                // Senaryo 2: Hâkimi çekimser yap + jürinin çoğunluğunu al
+                const senaryo2 = cekimserRusvet + (juriCoguluk * juriRusvet);
+
+                // Senaryo 3: Hâkime rüşvet verme + tüm jüriyi al
+                const senaryo3 = juriSayisi * juriRusvet;
+
+                // Bu hâkim için en iyi senaryo
+                const scenarios = [
+                    { name: 'Senaryo 1: Hâkim Beraat', cost: senaryo1, detail: `Hâkim ${i}'e ${beraatRusvet.toLocaleString('tr-TR')}₺ rüşvet (direkt beraat)` },
+                    { name: 'Senaryo 2: Hâkim Çekimser + Jüri Çoğunluk', cost: senaryo2, detail: `Hâkim ${i}'e ${cekimserRusvet.toLocaleString('tr-TR')}₺ + ${juriCoguluk} jüri üyesine ${(juriCoguluk * juriRusvet).toLocaleString('tr-TR')}₺` },
+                    { name: 'Senaryo 3: Tüm Jüri', cost: senaryo3, detail: `${juriSayisi} jüri üyesinin tamamına ${(juriSayisi * juriRusvet).toLocaleString('tr-TR')}₺` }
+                ];
+
+                const bestForThisHakim = scenarios.reduce((min, scenario) => 
+                    scenario.cost < min.cost ? scenario : min
+                );
+
+                allResults.push({
+                    hakim: i,
+                    ...bestForThisHakim
+                });
+
+                if (bestForThisHakim.cost < minCost) {
+                    minCost = bestForThisHakim.cost;
+                    bestHakim = i;
+                    bestStrategy = bestForThisHakim;
+                }
+            }
+
+            // Sonuçları göster
+            displayResults(minCost, bestHakim, bestStrategy, allResults);
+        }
+
+        function displayResults(minCost, bestHakim, bestStrategy, allResults) {
+            const resultSection = document.getElementById('resultSection');
+            const minCostDiv = document.getElementById('minCost');
+            const resultDetailDiv = document.getElementById('resultDetail');
+            const allStrategiesDiv = document.getElementById('allStrategies');
+
+            minCostDiv.innerHTML = `${minCost.toLocaleString('tr-TR')} ₺`;
+            
+            resultDetailDiv.innerHTML = `
+                <h4>🎯 Optimal Strateji</h4>
+                <p><strong>Seçilecek Hâkim:</strong> Hâkim ${bestHakim}</p>
+                <p><strong>Strateji:</strong> ${bestStrategy.name}</p>
+                <p><strong>Detay:</strong> ${bestStrategy.detail}</p>
+                <span class="strategy-badge">Toplam Maliyet: ${minCost.toLocaleString('tr-TR')} ₺</span>
+            `;
+
+            // Tüm hâkimler için özet
+            let allStrategiesHTML = '<h4>📊 Tüm Hâkimler İçin Analiz</h4>';
+            allResults.sort((a, b) => a.cost - b.cost).forEach((result, index) => {
+                const badge = index === 0 ? '🏆 EN UCUZ' : '';
+                allStrategiesHTML += `
+                    <p style="margin: 8px 0; ${index === 0 ? 'font-weight: bold;' : ''}">
+                        ${badge} Hâkim ${result.hakim}: ${result.cost.toLocaleString('tr-TR')} ₺ 
+                        <span style="font-size: 0.9em; opacity: 0.9;">(${result.name})</span>
+                    </p>
+                `;
+            });
+            allStrategiesDiv.innerHTML = allStrategiesHTML;
+
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Sayfa yüklendiğinde hâkim kartlarını oluştur
+        window.onload = createHakimCards;
+    </script>
+</body>
+</html>
