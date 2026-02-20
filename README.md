@@ -1,4 +1,4 @@
- ⚖️ Adalı Mahkeme - Beraat Optimizasyon Sistemi
+ Adalı Mahkeme - Beraat Optimizasyon Sistemi
 
 Modern ve interaktif bir web uygulaması ile mahkeme beraat stratejilerini optimize edin!
 
@@ -7,38 +7,29 @@ Modern ve interaktif bir web uygulaması ile mahkeme beraat stratejilerini optim
 ![CSS](https://img.shields.io/badge/CSS-3-blue.svg)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow.svg)
 
-## 📖 Proje Hakkında
+Proje Hakkında
 
-Adalı Mahkeme, matematiksel optimizasyon problemini eğlenceli bir senaryo ile birleştiren bir web uygulamasıdır. Kullanıcılar, farklı hâkim ve jüri rüşvet parametreleri girerek en düşük maliyetle beraat etme stratejisini hesaplayabilir.
+Adalı Mahkeme, matematiksel optimizasyon problemini bir senaryo ile birleştiren bir web uygulamasıdır. Kullanıcılar, farklı hâkim ve jüri rüşvet parametreleri girerek en düşük maliyetle beraat etme stratejisini hesaplayabilir.
 
-### 🎯 Senaryo
+Senaryo
 Bir adada tatildeyken, yerde bıçaklanmış bir adam buluyorsunuz. Yardım etmeye çalışırken ada polisi sizi tutukluyor. Adada farklı işleyen bir adalet sistemi var ve siz en düşük maliyetle beraat etmenin yolunu bulmalısınız.
 
-### ⚖️ Mahkeme Kuralları
+Mahkeme Kuralları
 - **Hâkim "Beraat" verirse** → Direkt serbest kalırsınız
 - **Hâkim "Çekimser" kalırsa** → Jürinin %50'sinden fazlası beraat yönünde oy vermeli
 - **Hâkim "Suçlu" derse** → Jürinin %100'ü beraat yönünde oy vermeli
 
-## 🚀 Hızlı Başlangıç
 
-### Ön Gereksinimler
-Bu proje tamamen HTML/CSS/JavaScript ile yazılmıştır ve **herhangi bir kurulum gerektirmez**.
 
-Sadece bir web tarayıcısına ihtiyacınız var:
-- Google Chrome (önerilen)
-- Firefox
-- Safari
-- Edge
+Çalıştırma Adımları
 
-### 🖥️ Çalıştırma Adımları
-
-#### Yöntem 1: Doğrudan Tarayıcıda Açma
+Yöntem 1: Doğrudan Tarayıcıda Açma
 1. Projeyi bilgisayarınıza indirin veya klonlayın
 2. `adali_mahkeme.html` dosyasını bulun
 3. Dosyaya çift tıklayın
 4. Uygulama varsayılan tarayıcınızda açılacaktır
 
-#### Yöntem 2: Terminal/Komut Satırı ile Açma
+Terminal/Komut Satırı ile Açma
 
 **Windows:**
 ```bash
@@ -77,13 +68,13 @@ adali-mahkeme/
 └── README.md             # Proje dokümantasyonu
 ```
 
-## 🎮 Kullanım Kılavuzu
+Kullanım Kılavuzu
 
-### 1. Jüri Bilgilerini Girin
+1. Jüri Bilgilerini Girin
 - **Jüri Üye Sayısı:** Mahkemede kaç jüri üyesi olacağını belirleyin
 - **Jüri Rüşveti:** Her jüri üyesinin istediği rüşvet miktarını girin
 
-### 2. Hâkim Rüşvet Tutarlarını Ayarlayın
+2. Hâkim Rüşvet Tutarlarını Ayarlayın
 5 farklı hâkim için:
 - **Beraat Rüşveti:** Hâkimin direkt beraat vermesi için gereken tutar
 - **Çekimser Rüşveti:** Hâkimin çekimser kalması için gereken tutar
@@ -98,23 +89,23 @@ Uygulama size:
 - Hangi senaryoyu uygulamanız gerektiğini
 - Tüm hâkimler için karşılaştırmalı analizi gösterecektir
 
-## 🧮 Algoritma Mantığı
+Algoritma Mantığı
 
 Uygulama her hâkim için 3 farklı senaryo hesaplar:
 
-### Senaryo 1: Hâkimi Beraat'e İkna Et
+Senaryo 1: Hâkimi Beraat'e İkna Et
 ```
 Maliyet = Hâkim Beraat Rüşveti
 Jüri Masrafı = 0
 ```
 
-### Senaryo 2: Hâkimi Çekimser Yap + Jüri Çoğunluğu
+Senaryo 2: Hâkimi Çekimser Yap + Jüri Çoğunluğu
 ```
 Jüri Çoğunluk = ⌊Jüri Sayısı / 2⌋ + 1
 Maliyet = Hâkim Çekimser Rüşveti + (Jüri Çoğunluk × Jüri Üye Rüşveti)
 ```
 
-### Senaryo 3: Tüm Jüriyi Satın Al
+Senaryo 3: Tüm Jüriyi Satın Al
 ```
 Maliyet = Jüri Sayısı × Jüri Üye Rüşveti
 Hâkim Masrafı = 0
@@ -122,14 +113,4 @@ Hâkim Masrafı = 0
 
 En düşük maliyetli senaryo optimal strateji olarak seçilir.
 
-
-## 🛠️ Teknolojiler
-
-- **HTML5** - Yapı
-- **CSS3** - Stil ve animasyonlar
-- **JavaScript (ES6)** - İş mantığı ve hesaplamalar
-- **Responsive Design** - Mobil uyumlu tasarım
-
-
-
-## 🙏 Teşekkürler
+🙏 Teşekkürler
